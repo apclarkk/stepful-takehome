@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String    @id @default(cuid())
+  name        String
+  email       String    @unique
+  phoneNumber String?
+  role        Role      @default(STUDENT)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  // Relations
+  sessionsAsStudent    Session[] @relation("StudentSessions")
+  sessionsAsCoach      Session[] @relation("CoachSessions")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  startTime    DateTime
+  endTime      DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  notes        String?
+  rating       Int?
+  
+  // Relations
+  student      User?     @relation("StudentSessions", fields: [studentId], references: [id])
+  studentId    String?
+  coach        User?     @relation("CoachSessions", fields: [coachId], references: [id])
+  coachId      String?
+
+  @@index([studentId])
+  @@index([coachId])
+}
+
+enum Role {
+  STUDENT
+  COACH
+}
