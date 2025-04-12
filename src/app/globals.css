@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+@layer base {
+	:root {
+		--radius: 0.625rem;
+		--background: #ffffff;
+		--foreground: #242424;
+		--primary: #363636;
+		--primary-foreground: #fbfbfb;
+		--border: #ebebeb;
+		--ring: #b4b4b4;
+		--pink: #c71a4b;
+	}
+
+	.dark {
+		--background: #242424;
+		--foreground: #fbfbfb;
+		--primary: #ebebeb;
+		--primary-foreground: #363636;
+		--border: rgba(255, 255, 255, 0.1);
+		--ring: #8d8d8d;
+	}
+}
+
+@layer utilities {
+	.text-pink {
+		color: var(--pink);
+	}
+	.bg-pink {
+		background-color: var(--pink);
+	}
+	.border-pink {
+		border-color: var(--pink);
+	}
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
