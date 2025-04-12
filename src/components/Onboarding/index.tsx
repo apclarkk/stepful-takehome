@@ -1,4 +1,5 @@
 'use client';
+import { Card } from '../Card'
 import { useCallback, useState } from 'react';
 import { Role } from '@prisma/client';
 import { Input } from '../Input';
@@ -51,8 +52,8 @@ export const Onboarding = () => {
     }, []);
 
     return (
-        <div className="bg-white rounded-lg shadow-md max-w-md w-full mx-auto p-8">
-            <div className="flex flex-col gap-4">
+        <Card className="max-w-xl">
+            <div className="flex flex-col gap-4 w-full">
                 <div className="flex flex-col gap-4">
                     <div className="text-center gap-4">
                         <h1 className="text-2xl font-semibold">Welcome!</h1>
@@ -135,6 +136,6 @@ export const Onboarding = () => {
                     </button>
                 )}
             </div>
-        </div>
+        </Card>
     );
 };

@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserProvider } from "@/contexts/UserContext";
 import { Header } from "@/components/Header";
 import { QueryProvider } from "@/providers/QueryProvider";
+import { SessionTypeProvider } from "@/providers/SessionTypeProvider";
 
 const inter = Inter();
 
@@ -24,8 +25,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <UserProvider>
-            <Header />
-            {children}
+            <SessionTypeProvider>
+              <Header />
+              {children}
+            </SessionTypeProvider>
           </UserProvider>
         </QueryProvider>
       </body>
