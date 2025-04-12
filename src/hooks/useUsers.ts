@@ -1,6 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { User } from "@prisma/client";
 
+export type CreateUserInput = Omit<User, "id" | "createdAt" | "updatedAt">;
+
 export function useUsers() {
 	const queryClient = useQueryClient();
 
@@ -15,10 +17,12 @@ export function useUsers() {
 		},
 	});
 
-	const { mutate: createUser, isPending: isCreatingUser } = useMutation({
-		mutationFn: async (
-			input: Omit<User, "id" | "createdAt" | "updatedAt">
-		) => {
+	const { mutateAsync: createUser, isPending: isCreatingUser } = useMutation<
+		User,
+		Error,
+		CreateUserInput
+	>({
+		mutationFn: async (input: CreateUserInput) => {
 			const response = await fetch("/api/users", {
 				method: "POST",
 				headers: {
@@ -31,8 +35,9 @@ export function useUsers() {
 			}
 			return response.json();
 		},
-		onSuccess: () => {
+		onSuccess: (data) => {
 			queryClient.invalidateQueries({ queryKey: ["users"] });
+			return data;
 		},
 	});
 

@@ -2,24 +2,32 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react';
 import { User } from '@prisma/client';
-import { useUsers } from '@/hooks/useUsers';
+import { useUsers, CreateUserInput } from '@/hooks/useUsers';
+
 
 
 interface UserContextType {
   user: User | undefined;
   setUser: (user: User | undefined) => void;
   allUsers: User[] | undefined;
+  createUser: (input: CreateUserInput) => Promise<User>;
+  isCreatingUser: boolean;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
-
 export function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useState<User | undefined>(undefined);
-  const { users } = useUsers();
+  const { users: allUsers, createUser, isCreatingUser } = useUsers();
 
   return (
-    <UserContext.Provider value={{ user, setUser, allUsers: users }}>
+    <UserContext.Provider value={{
+      user,
+      setUser,
+      allUsers,
+      createUser,
+      isCreatingUser
+    }}>
       {children}
     </UserContext.Provider>
   );
