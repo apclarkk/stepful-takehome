@@ -1,4 +1,4 @@
-import { PrismaClient, Role } from '@prisma/client';
+import { PrismaClient, Role } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
@@ -48,7 +48,7 @@ async function main() {
 	});
 
 	// Create an available slot with coach1 (We're keeping the slot unbooked for testing)
-	// @ts-expect-error - This is a test slot
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const slot1 = await prisma.session.create({
 		data: {
 			startTime: tomorrow,
@@ -102,10 +102,10 @@ async function main() {
 }
 
 main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  }); 
+	.catch((e) => {
+		console.error(e);
+		process.exit(1);
+	})
+	.finally(async () => {
+		await prisma.$disconnect();
+	});

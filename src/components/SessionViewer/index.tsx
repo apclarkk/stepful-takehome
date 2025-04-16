@@ -23,7 +23,7 @@ export const SessionViewer = () => {
 const SessionViewerInner = ({ user, type }: { user: User, type: SessionType }) => {
     const { userSessions, deleteSession, updateSession } = useSessions({ user, type })
 
-    const handleUpdate = useCallback((sessionId: string, sessionData: Partial<Session>) => updateSession({ sessionId, sessionData }), [])
+    const handleUpdate = useCallback((sessionId: string, sessionData: Partial<Session>) => updateSession({ sessionId, sessionData }), [updateSession])
 
     const groupedSessions = useMemo(() => {
         if (!userSessions) return []

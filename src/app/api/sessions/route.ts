@@ -10,6 +10,7 @@ export async function GET(request: Request) {
 		const type = searchParams.get("type") as SessionType;
 		const now = new Date();
 
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		let where: Record<string, any> = {};
 
 		if (coachId) {

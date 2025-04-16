@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { QueryProvider } from "@/providers/QueryProvider";
 import { SessionTypeProvider } from "@/providers/SessionTypeProvider";
 
-const inter = Inter();
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Stepful Coaching Take Home - Andrew Clark",

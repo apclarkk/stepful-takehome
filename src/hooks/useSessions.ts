@@ -13,7 +13,7 @@ export function useSessions({ user, type = "upcoming" }: UseSessionsOptions) {
 
 	const { id: userId, role } = user;
 
-	const { data: userSessions, refetch } = useQuery<
+	const { data: userSessions } = useQuery<
 		(Session & { coach: User | null; student: User | null })[]
 	>({
 		queryKey: ["sessions", userId, type],
